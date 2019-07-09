@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Авторизация</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/signin.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+body  {
+  background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).jpg");
+   height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+</style>
+</head>
+<body class="text-center">
+    <div class="bg"></div>
+    {% from "formhelpers.html" import render_field %}
+    <form method=post class="form-signin">
+    <h2 class="form-signin-heading">Авторизация</h2>
+      <dl>
+        {{ render_field(form.login) }}
+        {{ render_field(form.pwd) }}
+      </dl>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Войти</button>
+        <a href="{{ url_for('register') }}" type="button" class="btn btn-lg btn-primary btn-block">Регистрация</a>
+    </form>
+
+</body>
+</html>

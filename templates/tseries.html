@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3>{{ tseries.title}}</h3>
+      <p>Премьера - {{ tseries.start.day }}.{{ tseries.start.month }}.{{ tseries.start.year }}</p>
+        <p>{{ tseries.description }}</p>
+    </div>
+
+    <div class="col-sm-4">
+    <img class="card-img-top" src="{{tseries.image}}" alt="Card image cap" >
+    </div>
+
+    <div class="col-sm-4">
+        <div class="inline">
+            {% if current_user.is_admin() %}
+            <a class="btn btn-secondary" role="button" href="{{ url_for('episode_new') }}">Добавить серию</a>
+            {% endif %}
+            <div class="col-sm-4">
+            <div class="row">
+            <div class="col">
+                <p> Оценка </p>
+            </div>
+                <select  class="custom-select score_title" id="{{ st.id }}">
+                    <option  {%  if st.score_title and st.score_title == 0 %} selected {% endif %} >Оцените сериал</option>
+                    <option  {%  if st.score_title and st.score_title == 1 %} selected {% endif %} >1</option>
+                    <option  {%  if st.score_title and st.score_title == 2 %} selected {% endif %} >2</option>
+                    <option  {%  if st.score_title and st.score_title == 3 %} selected {% endif %} >3</option>
+                    <option  {%  if st.score_title and st.score_title == 4 %} selected {% endif %} >4</option>
+                    <option  {%  if st.score_title and st.score_title == 5 %} selected {% endif %} >5</option>
+                </select>
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+<br>
+<table class="table table-hover">
+<tbody id="myTable" class="sortable">
+{% for ep in episod %}
+<tr>
+<td>
+   <a href="{{ url_for('episode', id=ep.id) }}" class="list-group-item">{{ ep.name + ' '}} - сезон {{ ' ' + ep.season}}</a>
+</td>
+</tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+<script>
+$(document).ready(function(){
+  $(".score_title").change(function() {
+    var id_ = this.id;
+    var value_ = this.value;
+    jQuery.post('/score', {id: id_, value: value_});
+  });
+});
+</script>
+
+{% endblock %}

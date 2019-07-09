@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<h3> {{ ep.name }}  </h3>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Продюсер</div>
+            <div class="panel-body">
+            {{ prod.first_name + ' ' + prod.last_name }}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">Актёры</div>
+          {% for actor in actors %}
+            <div class="panel-body">
+            {{ actor.first_name + ' ' + actor.last_name }}
+            </div>
+          {% endfor %}
+        </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

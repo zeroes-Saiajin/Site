@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<div class="container">
+<div class="row">
+    {% if current_user.is_admin() %}
+    <div class="col-md-8">
+        <a class="btn btn-info" role="button" href="{{ url_for('title_new') }}">Добавить Сериал</a>
+    </div>
+    {% endif %}
+</div>
+</div>
+<br>
+<table class="table table-hover">
+<tbody id="myTable" class="sortable">
+{% for series in seriess %}
+<tr>
+<td>
+   <a href="{{ url_for('tseries', id=series.id) }}" class="list-group-item">{{ series.title}}</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+
+
+{% endblock %}
